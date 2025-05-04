@@ -12,6 +12,10 @@ jobs:
           mkdir -p template/fonts
           unzip Roboto_v3.011.zip
           mv hinted/static/* template/fonts/
+      - name: Include .cls
+        run: |
+          cd $GITHUB_WORKSPACE
+          cp awesome-cv.cls template/
       - name: Upload zip
         uses: actions/upload-artifact@v4.6.2
         with:
