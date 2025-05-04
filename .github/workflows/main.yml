@@ -1,0 +1,20 @@
+on: push
+jobs:
+  package-create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Roboto
+        run: |
+          wget https://github.com/googlefonts/roboto-3-classic/releases/download/v3.011/Roboto_v3.011.zip
+          mkdir -p templates/fonts
+          unzip Roboto_v3.011.zip
+          mv hinted/static/* templates/fonts/
+      - name: Generate zip
+        run: |
+          cd templates
+          zip -r ../template.zip .
+      - name: Upload zip
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: template.zip
+          path: ./template.zip
